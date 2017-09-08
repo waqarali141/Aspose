@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+    <ul>
+    {% for name in prefix_names %}
+       <h2>
+           <li>  <a href="{% url 'extension:detail' name.1 %}"> {{ name.0 }}   </a>
+           </li>
+       </h2>
+    {% endfor %}
+    </ul>
+
+
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <ul>
+    {% for prefix in prefixes %}
+       <h2>
+           <li> <a href="{%  url 'extension:prefix' prefix.prefix %}">  {{ prefix.prefix }}  </a>
+           </li>
+       </h2>
+    {% endfor %}
+    </ul>
+
+</body>
+</html>
