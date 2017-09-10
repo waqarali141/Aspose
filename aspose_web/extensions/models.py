@@ -7,7 +7,7 @@ from django.db import models
 
 
 class Extension(models.Model):
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=20, primary_key=True, unique=True)
     detail = models.TextField()
     prefix = models.CharField(max_length=120)
 

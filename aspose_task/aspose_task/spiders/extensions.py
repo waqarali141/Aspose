@@ -21,22 +21,20 @@ class Extensions(Spider):
             yield Request(url=url,
                           callback=self.parse_extensions_over_view,
                           meta={'prefix': prefix})
-            return
 
     def parse_extensions_over_view(self, response):
         for extension_request in self.extract_extensions_listing(response):
             yield extension_request
 
-        # if response.xpath('.//*[@class="page_text"]//p[contains(text(), "Page")]//a'):
-        #     for next_page in self.parse_pagination(response):
-        #         yield next_page
+        if response.xpath('.//*[@class="page_text"]//p[contains(text(), "Page")]//a'):
+            for next_page in self.parse_pagination(response):
+                yield next_page
 
     def extract_extensions_listing(self, response):
         listed_extensions = response.xpath('.//*[@class="page_text"]//p[descendant::br]')
         for extension in listed_extensions:
             meta = copy.deepcopy(response.meta)
 
-            #title = file extension .cbz
             name = extension.xpath('.//a/@title').extract()[0].split()[2] .replace('.', '')
             url = urlparse.urljoin(response.url,
                                    extension.xpath('.//a/@href').extract()[0]
@@ -45,9 +43,6 @@ class Extensions(Spider):
             yield Request(url=url,
                           callback=self.parse_extension_detail,
                           meta = meta)
-            return
-
-
 
     def parse_pagination(self, response):
         next_pages = response.xpath('.//*[@class="page_text"]//p[contains(text(), "Page")]//a[not(contains(text(), "1"))]')

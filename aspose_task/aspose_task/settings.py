@@ -13,7 +13,15 @@ BOT_NAME = 'aspose_task'
 
 SPIDER_MODULES = ['aspose_task.spiders']
 NEWSPIDER_MODULE = 'aspose_task.spiders'
+import sys
+import os
+import django
 
+cwd = os.getcwd()
+DIR_PATH = '/'.join(cwd.split('/')[:-1]) + '/aspose_web'
+sys.path.insert(0, DIR_PATH)
+os.environ['DJANGO_SETTINGS_MODULE'] = 'aspose_web.settings'
+django.setup()
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'aspose_task (+http://www.yourdomain.com)'
@@ -22,12 +30,12 @@ NEWSPIDER_MODULE = 'aspose_task.spiders'
 ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-CONCURRENT_REQUESTS = 10
+# CONCURRENT_REQUESTS = 10
 
 # Configure a delay for requests for the same website (default: 0)
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 10
+# DOWNLOAD_DELAY = 10
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -64,9 +72,9 @@ DOWNLOAD_DELAY = 10
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'aspose_task.pipelines.AsposeTaskPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'aspose_task.pipelines.AsposeTaskPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html

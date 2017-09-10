@@ -2,20 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Extensions Prefixes</title>
 </head>
 <body>
-
+<h1>  Extensions List  </h1>
     <ul>
     {% for name in prefix_names %}
-       <h2>
-           <li>  <a href="{% url 'extension:detail' name.1 %}"> {{ name.0 }}   </a>
+           <li>  <a href="{% url 'extension:detail' name.1 %}"> .{{ name.0 }}   </a>
            </li>
-       </h2>
     {% endfor %}
     </ul>
 
-
+    {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
 
 </body>
 </html>

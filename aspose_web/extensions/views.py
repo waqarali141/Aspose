@@ -10,18 +10,19 @@ from .models import Extension
 class ExtensionsPrefixes(generic.ListView):
     template_name = 'extensions/prefixes.html'
     context_object_name = 'prefixes'
-
+    # paginate_by = 13
     def get_queryset(self):
-        return Extension.objects.values('prefix').distinct()
+        return Extension.objects.values('prefix').distinct().order_by('prefix')
 
 
 class ExtensionsNames(generic.ListView):
     template_name = 'extensions/names.html'
     context_object_name = 'prefix_names'
+    paginate_by = 30
 
     def get_queryset(self):
         prefix_name = self.kwargs['prefix']
-        return Extension.objects.filter(prefix=prefix_name).values_list('name', 'pk')
+        return Extension.objects.filter(prefix=prefix_name).values_list('name', 'pk').order_by('name')
 
 
 class ExtensionDetail(generic.DetailView):
