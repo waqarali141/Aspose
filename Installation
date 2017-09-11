@@ -1,0 +1,23 @@
+1. Make Sure you've installed all the Dependencies mentioned in the "requirements.txt". It is preferred to work in virtualenv to keep your dependencies separate from other projects.
+
+2. Create a virtual environment and run the command "pip install -r requirements.txt" to install all the dependencies.
+
+3. The Project directory tree is listed below
+── Aspose
+    ├── aspose_task
+    │   └── aspose_task
+    │       └── spiders
+    └── aspose_web
+        ├── aspose_web
+        └── extensions
+            ├── migrations
+            └── templates
+                └── extensions
+
+4. First, we need to crawl the "http://file.org/sitemap.html" using Scrapy. It has been customised to store the scraped data as Django model Object. make sure you're in the scrapy project directory i.e Aspose/asopose_task and run the command "scrapy crawl extensions"
+
+5. The Scraped data will be stored as Django model object for our web application. After the crawler has crawled all the extensions data, move to the folder
+Aspose>aspose_web.
+
+6. This is our web-application open command line tool here and runs the command "python manage.py runserver" to run the application.
+
