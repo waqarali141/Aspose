@@ -1,7 +1,15 @@
 __author__ = 'waqarali'
+
+"""
+Scrapy Spider for http://file.org/sitemap.html
+To Scrape all the listed extensions
+Store the scrapped item as Python Django Models Object
+"""
 import urlparse
 import copy
+
 from scrapy import Spider, Request
+
 from aspose_task.items import AsposeTaskItem
 
 
@@ -35,17 +43,18 @@ class Extensions(Spider):
         for extension in listed_extensions:
             meta = copy.deepcopy(response.meta)
 
-            name = extension.xpath('.//a/@title').extract()[0].split()[2] .replace('.', '')
+            name = extension.xpath('.//a/@title').extract()[0].split()[2].replace('.', '')
             url = urlparse.urljoin(response.url,
                                    extension.xpath('.//a/@href').extract()[0]
-                               )
+                                   )
             meta['name'] = name
             yield Request(url=url,
                           callback=self.parse_extension_detail,
-                          meta = meta)
+                          meta=meta)
 
     def parse_pagination(self, response):
-        next_pages = response.xpath('.//*[@class="page_text"]//p[contains(text(), "Page")]//a[not(contains(text(), "1"))]')
+        next_pages = response.xpath(
+            './/*[@class="page_text"]//p[contains(text(), "Page")]//a[not(contains(text(), "1"))]')
         for page in next_pages:
             meta = copy.deepcopy(response.meta)
             url = page.xpath('@href').extract()[0]
@@ -73,7 +82,3 @@ class Extensions(Spider):
             return '\n'.join(cleaned_text)
         else:
             return text.strip()
-
-
-
-

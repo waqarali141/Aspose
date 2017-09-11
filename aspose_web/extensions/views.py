@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render
-from django.http import HttpResponse
 from django.views import generic
+
 from .models import Extension
 
 
 class ExtensionsPrefixes(generic.ListView):
     template_name = 'extensions/prefixes.html'
     context_object_name = 'prefixes'
-    # paginate_by = 13
+
     def get_queryset(self):
         return Extension.objects.values('prefix').distinct().order_by('prefix')
 
@@ -29,6 +28,3 @@ class ExtensionDetail(generic.DetailView):
     model = Extension
     template_name = 'extensions/detail.html'
     context_object_name = 'extension'
-
-
-

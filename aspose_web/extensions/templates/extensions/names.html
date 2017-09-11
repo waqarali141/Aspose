@@ -5,16 +5,16 @@
     <title>Extensions Prefixes</title>
 </head>
 <body>
-<h1>  Extensions List  </h1>
-    <ul>
+<h1> Extensions List </h1>
+<ul>
     {% for name in prefix_names %}
-           <li>  <a href="{% url 'extension:detail' name.1 %}"> .{{ name.0 }}   </a>
-           </li>
+        <li><a href="{% url 'extension:detail' name.1 %}"> .{{ name.0 }}   </a>
+        </li>
     {% endfor %}
-    </ul>
+</ul>
 
-    {% if is_paginated %}
-        <div class="pagination">
+{% if is_paginated %}
+    <div class="pagination">
             <span class="page-links">
                 {% if page_obj.has_previous %}
                     <a href="?page={{ page_obj.previous_page_number }}">previous</a>
@@ -26,8 +26,8 @@
                     <a href="?page={{ page_obj.next_page_number }}">next</a>
                 {% endif %}
             </span>
-        </div>
-    {% endif %}
+    </div>
+{% endif %}
 
 </body>
 </html>

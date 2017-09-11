@@ -9,14 +9,14 @@
 </head>
 <body>
 <h1> File extensions </h1>
-    <ul>
+<ul>
     {% for prefix in prefixes %}
-           <li> <a href="{%  url 'extension:prefix' prefix.prefix %}">  {{ prefix.prefix }}  </a>
-           </li>
+        <li><a href="{% url 'extension:prefix' prefix.prefix %}">  {{ prefix.prefix }}  </a>
+        </li>
     {% endfor %}
-    </ul>
-    {% if is_paginated %}
-        <div class="pagination">
+</ul>
+{% if is_paginated %}
+    <div class="pagination">
             <span class="page-links">
                 {% if page_obj.has_previous %}
                     <a href="{?page={{ page_obj.previous_page_number }}">previous</a>
@@ -28,8 +28,8 @@
                     <a href="?page={{ page_obj.next_page_number }}">next</a>
                 {% endif %}
             </span>
-        </div>
-    {% endif %}
+    </div>
+{% endif %}
 
 </body>
 </html>

@@ -7,6 +7,7 @@
 
 
 class AsposeTaskPipeline(object):
+    # To save the scrapped item as a Django Model Object in DB
     def process_item(self, item, spider):
         item.save()
         return item
